@@ -1,0 +1,170 @@
+<!--
+  Name: 
+    Firebase Messager (Web ver.)
+
+  Authors: 
+    Pardn Ltd 帕登國際有限公司 <mail@pardn.ltd>
+    Pardn Chiu 邱敬幃 <chiuchingwei@icloud.com>
+
+  Copyright: 
+    pardn.ltd 帕登國際有限公司
+
+  Licence: 
+    本授權條款允許使用者重製、散布、傳輸以及修改著作，但不得為商業目的之使用。
+    使用時必須按照著作人指定的方式表彰其姓名。
+
+  Licence URI: 
+    https://github.com/pardnchiu/firebase-messager-web/blob/main/LICENSE
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" href="./css/global.css">
+  <script type="module" src="./js/firebase.js"></script>
+</head>
+<body class="no-select">
+  <div id="unauth-view">
+    <div df="login">
+      <figure>
+        <img src="./image/logo.svg" alt="">
+        <figcaption>
+          <h6>Firebase</h6>
+          <p>Messager</p>
+        </figcaption>
+      </figure>
+      <div df="signup">
+        <i class="fas fa-user-alt"></i>
+        <input class="can-select" type="text" name="" id="" placeholder="用戶名稱">
+      </div>
+      <div>
+        <i class="fas fa-envelope"></i>
+        <input class="can-select" type="email" name="" id="" placeholder="登入信箱">
+      </div>
+      <div>
+        <i class="fas fa-lock"></i>
+        <input class="can-select" type="password" name="" id="" placeholder="登入密碼">
+      </div>
+      <button id="login-act" df="main login">登入</button>
+      <button id="signup-act" df="main signup">註冊</button>
+      <button id="login-show" df="sub signup">前往登入</button>
+      <button id="signup-show" df="sub login">註冊用戶</button>
+      <p>Copyright (c) 2022 Pardn Ltd<br>帕登國際有限公司</p>
+    </div>
+  </div>
+  <div df="body">
+    <h6 id="page-title">Firebase Messager</h6>
+    <div id="main-view" uid="">
+      <nav>
+        <h6 id="main-view-title">收件匣</h6>
+        <ul class="">
+          <li id="get-pages">
+            <i class="fas fa-exchange-alt"></i>
+            <p>切換</p>
+          </li>
+          <li id="get-auths">
+            <i class="fas fa-user-friends"></i>
+            <p>註冊用戶</p>
+          </li>
+          <li id="get-chatbox" class="selected">
+            <i class="fas fa-comments"></i>
+            <p>收件匣</p>
+          </li>
+          <li id="get-auths-block">
+            <i class="fas fa-comment-slash"></i>
+            <p>已封鎖</p>
+          </li>
+        </ul>
+      </nav>
+      <section df="list">
+        <nav>
+          <i class="fas fa-search"></i>
+          <input class="can-select" type="text" placeholder="搜尋">
+        </nav>
+        <ul id="user-list" df="empty inbox">
+        </ul>
+      </section>
+      <section df="body">
+        <nav>
+          <img id="chatbox-head" src="" alt="">
+          <h6 id="chatbox-title"></h6>
+          <ul>
+            <li id="btn-chatbox-list">
+              <i class="fas fa-ellipsis-h"></i>
+              <script>
+                document.getElementById('btn-chatbox-list').parentElement.onclick = function(){
+                  const isShow = this.classList.contains('show');
+                  isShow ? this.classList.remove('show') : this.classList.add('show');
+                };
+              </script>
+            </li>
+            <li id="btn-chatbox-user">
+              <i class=" fas fa-user-alt"></i>
+              <p>用戶資料</p>
+            </li>
+            <li id="btn-chatbox-block">
+              <i class="fas fa-comment-slash"></i>
+              <p>封鎖用戶</p>
+            </li>
+            <li id="btn-chatbox-hide">
+              <i class="fas fa-archive"></i>
+              <p>封存對話</p>
+            </li>
+            <li id="btn-chatbox-delete">
+              <i class="fas fa-trash-alt"></i>
+              <p>刪除對話</p>
+            </li>
+            <li id="btn-chatbox-close">
+              <i class="fas fa-times-circle"></i>
+              <p>關閉對話</p>
+            </li>
+          </ul>
+        </nav>
+        <ul id="chatbox-body">
+        </ul>
+        <div>
+          <textarea class="can-select" name="" id="chat-input" cols="30" rows="10" placeholder="輸入內容"></textarea>
+          <button id="chat-act">送出</button>
+        </div>
+      </section>
+    </div>
+    <div id="right-view">
+      <figure>
+        <img id="auth-head" src="" alt="">
+        <i id="btn-head-change" class="fas fa-sync-alt"></i>
+        <figcaption>
+          <strong id="auth-name"></strong>
+          <time id="auth-signup"></time>
+        </figcaption>
+      </figure>
+      <section>
+        <h6>個人資料</h6>
+        <div>
+          <i class="fas fa-envelope"></i>
+          <i id="btn-edit-auth-email" class="fas fa-pen" df="edit"></i>
+          <em>信箱:</em>
+          <strong>chiuchingwei@icloud.com</strong>
+        </div>
+        <div>
+          <i class=" fas fa-user-plus"></i>
+          <em>註冊:</em>
+          <strong>2天前</strong>
+        </div>
+        <div>
+          <i class="fas fa-sign-in-alt"></i>
+          <em>登入:</em>
+          <strong>現在</strong>
+        </div>
+        <div>
+          <i class="fas fa-file-alt"></i>
+          <i id="btn-edit-auth-cv" class="fas fa-pen" df="edit"></i>
+          <strong df="cv">Firebase Messager<br>透過 Firebase 在 靜態網頁 (Static Web) 上打造 即時訊息 (Realtime Messaging) 功能</strong>
+        </div>
+      </section>
+    </div>
+  </div>
+</body>
+</html>
